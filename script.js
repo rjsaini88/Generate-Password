@@ -3,19 +3,15 @@ var generateBtn = document.querySelector("#generate");
 
 
 var alphabet = "abcdefghijklmnopqrstuvwxyz"
-console.log (alphabet)
+// console.log (alphabet)
 var lowercase = alphabet.split('')
-console.log(lowercase)
+// console.log(lowercase)
 var uppercase = lowercase.map(letter => letter.toUpperCase());
-console.log (uppercase)
+// console.log (uppercase)
 var numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
+// console.log(numbers)
 var specialCharacters = "!@#$%^&*()_+~\\`|}{[]:;?><,./-=".split('')
-console.log (specialCharacters)
-
-
-// var special = ['(', '~', '!', '@', '#', '$', '%', '^', '&', '*', '_', '-', '+', '=', '`', '|', '\', '(', ")", "{", "}", '[', '], ':', ';', '"', "'", '<, '>', ',', ".", '?', '/', ")", "]", ];
-
+// console.log (specialCharacters)
 
 
 // Write password to the #password input
@@ -31,9 +27,28 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 
 
+function getRandomInt(max) { 
+  return Math.floor(Math.random()* max)
+
+// Math.floor (Math.random)  
+// Math.ceil()
+}
+
 function generatePassword() {
 
-var passwordLength = prompt('How many characters would you like the password to be? (8-128)', '12')
+var passwordLength = prompt('How many characters would you like the password to be? (8-128)', '12') 
+
+if (passwordLength === null)
+  {return;}
+
+else if(passwordLength < 8 || passwordLength > 128) {
+// console.log("Make a valid selection")
+alert("Please make a valid selection");
+generatePassword()
+
+}
+
+else {
 
 var useUppercase = confirm('Would you like to include uppercase letters?')
 
@@ -44,7 +59,7 @@ var useNumbers = confirm ('Would you like to include numbers?')
 var useSpecialCharcters = confirm ('Would you like to include special characters?')
 
 console.log(passwordLength, useUppercase, useLowercase, useNumbers, useSpecialCharcters)
- 
+}
 var potentialChars= []
 
 if(useUppercase) {
@@ -59,16 +74,25 @@ if(useLowercase) {
     potentialChars = potentialChars.concat(numbers)
     }
 
-    // if(useSpecialCharcters) {
-    //   potentialChars = potentialChars.concat(special)
-    //   }
-
-
-      var password= ''
-      for (var i = 0; i < passwordLength; i++) {
-password = password + potentialChars [Math.random()]
+    if(useSpecialCharcters) {
+      potentialChars = potentialChars.concat(specialCharacters)
       }
-}
+console.log(potentialChars)
+
+
+      var password = ''
+      for (var i = 0; i < passwordLength; i++) {
+// passowrd = password + potentialChars [getRandomInt(potentialChars.length)]
+//         password = password + potentialChars
+password = password + potentialChars[Math.floor(Math.random(potentialChars.length))]
+// Math.floor(math.random()[potentialChars])
+
+// potentialChars[Math.floor(math.random()]; 
+ return password  
+
+      }
+
+    }
 
 //
 
@@ -94,8 +118,8 @@ THEN the password is either displayed in an alert or written to the page
 /*
 Need to create a function to generate password that meets certain criteria, so that it provides greater security
 Use prompt() and confrim to gatgher user input. 
-  Prompt Password length, select the  8-128 (12 default)
+  Prompt Password length, select the  8-128 (12 default), limit inputs
   Confrim use lowercase, uppercase, numberic, and/or special characters.
   One character from each prompt should be selected
   Password displays on the screen.   
-*/
+    */
