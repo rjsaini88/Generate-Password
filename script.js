@@ -12,10 +12,6 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 // Add event listener to generate button
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
-
 var alphabet = "abcdefghijklmnopqrstuvwxyz";
 // console.log (alphabet)
 var lowercase = alphabet.split("");
@@ -50,15 +46,16 @@ function generatePassword() {
     var useSpecialCharcters = confirm(
       "Would you like to include special characters?"
     );
-
-    console.log(
-      passwordLength,
-      useUppercase,
-      useLowercase,
-      useNumbers,
-      useSpecialCharcters
-    );
   }
+
+  console.log(
+    passwordLength,
+    useUppercase,
+    useLowercase,
+    useNumbers,
+    useSpecialCharcters
+  );
+
   var potentialChars = []; //Create a variable that creates an array of allowed characters.
 
   if (useUppercase) {
@@ -76,16 +73,28 @@ function generatePassword() {
   if (useSpecialCharcters) {
     potentialChars = potentialChars.concat(specialCharacters);
   }
+
+  //  if (useUppercase && useLowercase && useNumbers && useSpecialCharcters === null) {
+  //   alert("Please make a valid selection");
+  if (potentialChars === undefined) {
+    alert("Please make a valid selection");
+    generatePassword();
+  }
+
   console.log(potentialChars);
+
+  // function getRandomInt(max) {
+  //   return Math.floor(Math.random() * max);
+  // }
 
   var password = ""; //Run for loop to run iterations equal to password length to select character from potentialchars array.
   for (var i = 0; i < passwordLength; i++) {
-    password = password + potentialChars[getRandomInt(potentialChars.length)];
+    // password = password + potentialChars[getRandomInt(potentialChars.length)]; This methods works, getRandomInc function must be active.
 
-    // password =
-    //   password +
-    //   potentialChars[Math.floor(Math.random() * potentialChars.length)]; - This also works
-    // console.log(password);
+    password =
+      password +
+      potentialChars[Math.floor(Math.random() * potentialChars.length)]; //This also works
+    console.log(password);
   }
 
   return password;
